@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  sursu-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - log_volume:/app/logs
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - SECRET_KEY=
+      - DATABASE_URL=sqlite+aiosqlite:///./schedule.db
+
+volumes:
+  log_volume:

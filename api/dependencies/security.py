@@ -1,3 +1,4 @@
+import os
 from typing import Annotated
 
 from fastapi import Header, Depends, HTTPException
@@ -6,7 +7,7 @@ import hashlib
 import base64
 from urllib.parse import parse_qs, urlparse
 
-from config import SECRET_KEY
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
 def verify_signature(url: str, secret_key: str) -> bool:
@@ -36,7 +37,8 @@ class InitData:
 
 
 async def parse_launch_params(load_url: str = Header(..., title="URL запуска приложения")) -> InitData:
-    if not verify_signature(load_url, SECRET_KEY):
+
+    if SECRET_KEY and not verify_signature(load_url, SECRET_KEY):
         raise HTTPException(401, "Invalid load url")
 
     return InitData(load_url)

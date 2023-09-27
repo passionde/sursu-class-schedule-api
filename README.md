@@ -1,2 +1,13 @@
 # sursu-class-schedule-api
-API for web-app with schedule of SurSU pairs
+
+```shell
+docker-compose build
+```
+
+```shell
+docker-compose up
+```
+
+```shell
+docker-compose down
+```
