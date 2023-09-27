@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from fastapi import FastAPI, APIRouter
 from starlette.middleware.cors import CORSMiddleware
 
@@ -25,7 +29,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-prefix_router = APIRouter(prefix="/api")
+prefix_router = APIRouter(prefix="/api/v1")
 prefix_router.include_router(schedule_router)
 app.include_router(prefix_router)
 
